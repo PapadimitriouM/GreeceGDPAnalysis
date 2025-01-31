@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY . /app
 
-RUN R -e "install.packages('devtools')"
-
 RUN R -e "devtools::install_github('PapadimitriouM/greece_gdp_analysis', ref = '8425bd33d7aabc3194e4edc80bd58f25cfbe3e6f')"
 
 RUN R -e "renv::restore()"
