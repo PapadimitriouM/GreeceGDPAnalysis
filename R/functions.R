@@ -36,7 +36,12 @@ get_data <- function(){
 #' check_stationary(ts)
 check_stationary <- function(timeseries) {
 
+  if (!inherits(timeseries, "ts")) {
+    stop("Input must be a time series object (class 'ts')")
+  }
+
   y <- timeseries
+
   # FIGURE 1 :  level of the series
   plot_y  <- ggplot(data.frame(x = as.numeric(time(y)), y = as.numeric(y)), aes(x = x, y = y)) +
     geom_line() +
@@ -49,7 +54,7 @@ check_stationary <- function(timeseries) {
   #Stationarity tests
   kpss <- tseries::kpss.test(y)
 
-  if(kpss$p.value <= 0.05 | kpss$p.value == "p-value smaller than printed p-value") {
+  if(kpss$p.value <= 0.1 | kpss$p.value == "p-value smaller than printed p-value") {
     print("Time series is non-stationary")
 
     x    <- time(y)
@@ -62,7 +67,7 @@ check_stationary <- function(timeseries) {
   }
 
   # FIGURE 2 :  updated level of the series
-  plot_y  <- ggplot(data.frame(x = as.numeric(time(y_gr)), y = y_gr), aes(x = x, y = y)) +
+  plot_y  <- ggplot(data.frame(x = as.numeric(time(y_gr)), y = y_gr), aes(x = x, y = y_gr)) +
     geom_line() +
     labs(title = "FIG 2 - DIFF")
   plot_ac  <- ggAcf(y_gr,lag.max = 10) + labs(title="ACF")
@@ -77,8 +82,6 @@ check_stationary <- function(timeseries) {
 #' Check if time series has anomalies and smoothes them.
 #' @param timeseries A ts object.
 #' @importFrom ggplot2 ggplot aes labs geom_histogram geom_density geom_line
-#' @importFrom ggpubr ggarrange
-#' @importFrom forecast ggAcf ggPacf
 #' @importFrom stats quantile
 #' @importFrom zoo rollapply
 #' @export
@@ -98,7 +101,7 @@ check_stationary <- function(timeseries) {
 #' anomaly_smoothing(ts)
 anomaly_smoothing <- function(timeseries) {
   y_gr <- timeseries
-  ind <- seq(1,length(y_gr))
+  ind <- seq(1,length(y_gr[[1]]))
 
   df_n = data.frame(ind, y_gr)
 
@@ -141,16 +144,6 @@ anomaly_smoothing <- function(timeseries) {
   # Use on data
   df_diff_sm <- smooth_outliers(df_n, 2, 6)
 
-  #Plot new
-  plot_y_n  <- ggplot() +
-    geom_line(data = df_n, aes(x = time(y_gr), y = as.numeric(y_gr)), color = "red") +
-    geom_line(data = df_diff_sm, aes(x = time(y_gr), y = as.numeric(y_gr)), color = "blue") +
-    labs(title = "FIG 3 - SMOOTH")
-  plot_ac_n  <- ggAcf(df_diff_sm$y_gr ,lag.max = 10) + labs(title="ACF")
-  plot_pac_n <- ggPacf(df_diff_sm$y_gr , lag.max = 10) + labs(title="PACF")
-  # Display plot
-  ggarrange(plot_y_n,plot_ac_n,plot_pac_n,ncol = 3)
-
   return(df_diff_sm)
 }
 
@@ -176,6 +169,15 @@ anomaly_smoothing <- function(timeseries) {
 #' name <- "CLVMNACSCAB1GQEL_PC1"
 #' train_and_forecast_arima(df, name)
 train_and_forecast_arima <- function(dataframe, ts) {
+
+  if (!is.data.frame(dataframe)) {
+    stop("Input must be a data.frame")
+  }
+
+  if (!ts %in% names(dataframe)) {
+    stop("Specified column name not found in data.frame")
+  }
+
   df_diff_sm <- dataframe
 
   # Our updated data
@@ -184,7 +186,6 @@ train_and_forecast_arima <- function(dataframe, ts) {
 
   # Determine the split index for 80% training data
   split_index <- floor(0.8 * length(y_sm))
-  cat("Split index:", length(split_index), "\n")
 
   # Split the data into training and test sets
   train_data <- y_sm[1:split_index]

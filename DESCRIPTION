@@ -3,7 +3,7 @@ Type: Package
 Title: Analyse and model timeseries for forecast
 Version: 0.1.0
 Author: Emmanouil Papadimitriou
-Maintainer:<grgm123418@gmail.com>
+Maintainer: <grgm123418@gmail.com>
 Description: This package allows users to easily import, preprocess (stationarity and anomalies) and model fit a time series with an ARIMA model. Based on that, it can also create one step ahead forecasts using this model.
 License: GPL-3
 Encoding: UTF-8
@@ -23,4 +23,5 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    testthat
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

@@ -332,7 +332,7 @@
     },
     "doBy": {
       "Package": "doBy",
-      "Version": "4.6.24",
+      "Version": "4.6.25",
       "Source": "Repository",
       "Repository": "RSPM",
       "Requirements": [
@@ -352,7 +352,7 @@
         "tibble",
         "tidyr"
       ],
-      "Hash": "8ddf795104defe53c5392a588888ec68"
+      "Hash": "1068fcff98a77c9326a26e8143cfa10e"
     },
     "dplyr": {
       "Package": "dplyr",
@@ -897,7 +897,7 @@
     },
     "quantreg": {
       "Package": "quantreg",
-      "Version": "5.99.1",
+      "Version": "6.00",
       "Source": "Repository",
       "Repository": "RSPM",
       "Requirements": [
@@ -911,7 +911,7 @@
         "stats",
         "survival"
       ],
-      "Hash": "c48844cd7961de506a1b4d22b2e082c7"
+      "Hash": "2a91b35971a5eb01e2d0c01664755495"
     },
     "rbibutils": {
       "Package": "rbibutils",
