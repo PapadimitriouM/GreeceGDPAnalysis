@@ -8,7 +8,7 @@ RUN R -e "renv::snapshot()"
 
 RUN R -e "renv::restore()"
 
-RUN R -e "install.packages(c('devtools', 'targets')"
+RUN R -e "install.packages(c('devtools', 'targets'))"
 
 RUN R -e "devtools::load_all(".")"
 
