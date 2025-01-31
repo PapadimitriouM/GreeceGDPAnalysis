@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY . /app
 
+RUN sudo apt-get install libxml2-dev
+
 RUN R -e "renv::snapshot()"
 
 RUN R -e "renv::restore()"
