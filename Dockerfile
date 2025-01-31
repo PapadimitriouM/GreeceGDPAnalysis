@@ -8,8 +8,8 @@ RUN R -e "renv::snapshot()"
 
 RUN R -e "renv::restore()"
 
-RUN R -e "library(TimeSeriesAnalysis)"
-
 RUN R -e "devtools::load_all(".")"
+
+RUN R -e "library(TimeSeriesAnalysis)"
 
 RUN R -e "targets::tar_make()"
