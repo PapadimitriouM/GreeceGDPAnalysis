@@ -49,7 +49,7 @@ check_stationary <- function(timeseries) {
   plot_ac  <- ggAcf(y,lag.max = 10) + labs(title="ACF")
   plot_pac <- ggPacf(y, lag.max = 10) + labs(title="PACF")
   # Display plot
-  ggarrange(plot_y,plot_ac,plot_pac,ncol = 3)
+  ggpubr::ggarrange(plot_y,plot_ac,plot_pac,ncol = 3)
 
   #Stationarity tests
   kpss <- tseries::kpss.test(y)
@@ -73,7 +73,7 @@ check_stationary <- function(timeseries) {
   plot_ac  <- ggAcf(y_gr,lag.max = 10) + labs(title="ACF")
   plot_pac <- ggPacf(y_gr, lag.max = 10) + labs(title="PACF")
   # Display plot
-  ggarrange(plot_y,plot_ac,plot_pac,ncol = 3)
+  ggpubr::ggarrange(plot_y,plot_ac,plot_pac,ncol = 3)
 
   return(y_gr)
 }

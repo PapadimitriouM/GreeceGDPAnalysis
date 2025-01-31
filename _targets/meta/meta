@@ -1,0 +1,9 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+gdp_data|stem|421fc1ef2cc180ce|3d8e5f857c63cf80|e65258d601c089e1|902573251||t20119.8837845864s|s1077b|1077|rds|local|vector|||0||
+get_data|function|350f43fbea5e3e88
+check_stationary|function|2be2f01bcc367cc0
+train_and_forecast_arima|function|b9368200f08be42c
+anomaly_smoothing|function|935c2cd6e4370729
+stat_ts|stem|4f0847cf69bf048a|0898b80f42ea2003|9f2eaad35c97556d|-864393823||t20119.8852855988s|s1082b|1082|rds|local|vector|||0.39||
+sm_data|stem|2289b6e6c597a24c|74bf37b2aacab013|e6ccda0c356a058c|1247098904||t20119.8852859621s|s1090b|1090|rds|local|vector|||0.01||
+forecast_data|stem|4827e9c9fe080e25|f948e5c51155df14|0d5c06f2a37d6475|-1655811718||t20119.8852877925s|s607b|607|rds|local|vector|||0.16||

@@ -5,8 +5,7 @@ library(stats)
 library(tis)
 library(zoo)
 library(forecast)
-library(aTSA)
-source("functions.R")
+source("R/functions.R")
 
 list(
   tar_target(
