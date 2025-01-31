@@ -151,7 +151,7 @@ anomaly_smoothing <- function(timeseries) {
 #' Selects best ARIMA model and trains it based on our time series data, then does one-step ahead forecast.
 #' @param dataframe A pandas dataframe containing at least one ts object.
 #' @param ts A ts object to be selected from the dataframe
-#' @importFrom ggplot2 ggplot aes labs scale_color_manual theme_minimal geom_line
+#' @importFrom ggplot2 ggplot aes labs scale_color_manual theme_minimal geom_line ggsave
 #' @importFrom forecast forecast Arima auto.arima
 #' @importFrom dplyr select
 #' @export
@@ -234,7 +234,7 @@ train_and_forecast_arima <- function(dataframe, ts) {
   )
 
   # Plot the true values and forecasts using ggplot2
-  ggplot(forecast_df, aes(x = Time)) +
+  last_plot <- ggplot(forecast_df, aes(x = Time)) +
     geom_line(aes(y = True_Values, color = "True Values")) +
     geom_line(aes(y = Forecasted_Values, color = "Forecasted Values")) +
     labs(title = paste("One-Step-Ahead Forecasts vs True Values\nRMSE:", round(rmse, 2)),
@@ -242,6 +242,8 @@ train_and_forecast_arima <- function(dataframe, ts) {
          y = "Values") +
     scale_color_manual(values = c("True Values" = "blue", "Forecasted Values" = "red")) +
     theme_minimal()
+
+  ggsave("/home/my_plot.pdf", last_plot)
 
   return(forecast_df)
 }
