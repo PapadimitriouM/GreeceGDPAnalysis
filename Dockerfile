@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY . /app
 
-RUN R -e "renv::restore()"
-
 RUN R -e "renv::snapshot()"
 
 RUN R -e "renv::restore()"
